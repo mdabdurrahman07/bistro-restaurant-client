@@ -12,12 +12,11 @@ const PopularMenu = () => {
             <div className="flex justify-center">
             <div className="w-96 h-[4px] bg-[#E8E8E8] mb-14"></div>
             </div>
-
-            <PopularMenuCard></PopularMenuCard>
+        </div>
+        <PopularMenuCard></PopularMenuCard>
             <div className="flex justify-center mt-12">
                 <button className="btn  btn-wide border-0 border-b-4 border-[#1F2937] text-xl font-medium text-[#1F2937]">View Full  Menu</button>
                 </div>
-        </div>
         </div>
     );
 };
