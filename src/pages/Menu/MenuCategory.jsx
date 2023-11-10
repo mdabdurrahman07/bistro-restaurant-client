@@ -1,20 +1,16 @@
-import UseMenu from "../../Hooks/UseMenu";
+import SectionHero from "../../Components/SectionHero/SectionHero";
 
-const PopularMenuCard = () => {
-   const [Menu] = UseMenu()
-   const Popular = Menu.filter(popular => popular.category === 'popular')
-    // const [Menu  ,setMenu] = useState([])
-    // useEffect(()=>{
-    //     fetch('menu.json')
-    //     .then(res => res.json())
-    //     .then(data => setMenu(data))
-    // },[])
-    // console.log(Menu)
+/* eslint-disable react/prop-types */
+const MenuCategory = ({values , Title , bgIMG , Desc}) => {
+
     return (
         <div>
-            <div className="grid md:grid-cols-2 justify-center gap-7 items-center">
+
+       { Title &&  <SectionHero bgIMG={bgIMG} Title={Title} Desc={Desc}> </SectionHero>}
+            <div className="grid md:grid-cols-2 justify-center gap-7 items-center my-20">
                 {
-                 Popular.map(items => <div className="flex justify-center gap-5 items-center"  key={items._id}>
+            
+                 values.map(items => <div className="flex justify-center gap-5 items-center"  key={items._id}>
                         <img style={{borderRadius : '0 200px 200px 200px'}} className="w-[118px] h-[104px]" src={items.image} alt="" />
                         <div>
                             <h1 className="text-xl font-normal">{items.name}</h1>
@@ -29,4 +25,4 @@ const PopularMenuCard = () => {
     );
 };
 
-export default PopularMenuCard;
+export default MenuCategory;
