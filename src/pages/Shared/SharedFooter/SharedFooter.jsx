@@ -1,7 +1,7 @@
 const SharedFooter = () => {
     return (
        <footer>
-        <div className="footer p-10 bg-[#1F2937] text-neutral-content">
+        <div className="footer p-10 bg-[#1F2937] text-neutral-content mt-10">
            
             <aside >
    <h1  className="text-3xl font-medium text-white mb-5">CONTACT US</h1>

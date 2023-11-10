@@ -8,7 +8,7 @@ import img5 from '../../assets/home/05.png'
 import img6 from '../../assets/home/06.png'
 const Banner = () => {
     return (
-        <Carousel showStatus={false} autoPlay={true}>
+        <Carousel className="text-center" showStatus={false} autoPlay={true}>
                 <div>
                     <img src={img1} />
                     
