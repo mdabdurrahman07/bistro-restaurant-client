@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionHero from "../../Components/SectionHero/SectionHero";
 
 /* eslint-disable react/prop-types */
@@ -19,8 +20,12 @@ const MenuCategory = ({values , Title , bgIMG , Desc}) => {
                         <p className="text-[#BB8506] text-xl font-normal">${items.price}</p>
                  </div>)
                 }
-               
+                 
             </div>
+           <Link to={`/order/${Title}`}> <div className="flex justify-center my-12">
+                <button className="btn  border-0 border-b-4 border-[#1F2937] text-xl font-medium text-[#1F2937]">
+                    Order Your Favorite Food</button>
+                </div></Link>
         </div>
     );
 };
