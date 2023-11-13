@@ -1,7 +1,62 @@
+import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/UseAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import UseAxios from "../../../Hooks/UseAxios";
+
 /* eslint-disable react/prop-types */
 const Card = ({item}) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const axios = UseAxios()
+  const   {image ,  name ,  recipe , _id } = item;
+  const {User} = useAuth()
+  const handleAddToCart  = food => {
+    if(User && User.email){
+      //send data to the db
+      console.log(food)
+      const cartItem = {
+        foodID : _id,
+        image,
+        name,
+        userEmail : User.email
+      }
+      axios.post('/cart' , cartItem)
+      .then(res => {
+        console.log(res.data)
+        if(res?.data?.acknowledged){
+          Swal.fire({
+            title: "Good job!",
+            text: "Add Cart to Successful",
+            icon: "success"
+          });
+        }
 
-  const   {image ,  name ,  recipe } = item
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+
+      
+    }
+    else{
+      //alert 
+      Swal.fire({
+        title: "you're not logged in ",
+        text: "Please , login to add to the cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // send user to the login
+          navigate('/login') , {state : {from : location}}
+        }
+      });
+    }
+  }
     return (
         
             <div className="card w-96 bg-[#F3F3F3] shadow-xl">
@@ -12,7 +67,7 @@ const Card = ({item}) => {
                   <h2 className="card-title">{name}</h2>
                   <p>{recipe}</p>
                   <div className="card-actions">
-                    <button className="uppercase  text-[#BB8506] border-0 border-b-2
+                    <button onClick={() => handleAddToCart(item)} className="uppercase  text-[#BB8506] border-0 border-b-2
                      border-[#BB8506] px-6 py-3 rounded-lg bg-[#E8E8E8] hover:bg-[#1F2937] active:bg-[#1F2937] focus:outline-none focus:ring focus:bg-[#1F2937]">add to cart</button>
                   </div>
                 </div>

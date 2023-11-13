@@ -20,7 +20,7 @@ const ChefRecommends = () => {
             </div>
         </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center mb-10">
             {
                 Menu.slice(0,3).map(foods => <div key={foods._id} className="card w-96 bg-[#F3F3F3] shadow-xl">
                 <figure>

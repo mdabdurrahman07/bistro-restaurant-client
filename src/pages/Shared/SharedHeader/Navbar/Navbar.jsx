@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../../../Hooks/UseAuth";
 
 const Navbar = () => {
      const navOptions = <>
@@ -6,6 +7,14 @@ const Navbar = () => {
      <Link to="/menu"> <li><a>Menu</a></li></Link>
      <Link to="/order/salad"> <li><a>Order</a></li></Link>
       </>
+      const {User , logout} = useAuth()
+      const handleLogout = () => {
+          logout()
+          .then()
+          .catch(error => {
+            console.log(error.message)
+          })
+      }
     return (
         <div>
                         <div className="navbar fixed z-10 max-w-screen-2xl bg-black text-white bg-opacity-25">
@@ -26,7 +35,13 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+   {
+    User ? <>
+     <button onClick={handleLogout}>Logout</button>
+    </>
+    :
+    <Link to="/login"><button>Login</button></Link>
+   }
   </div>
 </div>
         </div>
