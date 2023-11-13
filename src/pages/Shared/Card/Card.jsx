@@ -2,18 +2,20 @@ import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/UseAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import UseAxios from "../../../Hooks/UseAxios";
+import UseCart from "../../../Hooks/UseCart";
 
 /* eslint-disable react/prop-types */
 const Card = ({item}) => {
   const navigate = useNavigate()
   const location = useLocation()
   const axios = UseAxios()
+  const [, refetch] = UseCart()
   const   {image ,  name ,  recipe , _id } = item;
   const {User} = useAuth()
-  const handleAddToCart  = food => {
+  const handleAddToCart  = () => {
     if(User && User.email){
       //send data to the db
-      console.log(food)
+      
       const cartItem = {
         foodID : _id,
         image,
@@ -29,6 +31,7 @@ const Card = ({item}) => {
             text: "Add Cart to Successful",
             icon: "success"
           });
+          refetch()
         }
 
       })
@@ -67,7 +70,7 @@ const Card = ({item}) => {
                   <h2 className="card-title">{name}</h2>
                   <p>{recipe}</p>
                   <div className="card-actions">
-                    <button onClick={() => handleAddToCart(item)} className="uppercase  text-[#BB8506] border-0 border-b-2
+                    <button onClick={handleAddToCart} className="uppercase  text-[#BB8506] border-0 border-b-2
                      border-[#BB8506] px-6 py-3 rounded-lg bg-[#E8E8E8] hover:bg-[#1F2937] active:bg-[#1F2937] focus:outline-none focus:ring focus:bg-[#1F2937]">add to cart</button>
                   </div>
                 </div>

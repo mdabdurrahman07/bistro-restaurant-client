@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/UseAuth';
@@ -69,7 +70,7 @@ const Login = () => {
 <div className="w-96 p-4 rounded-md shadow sm:p-8 bg-white -ml-5 md:ml-40 lg:ml-0">
 
 <p className="text-xl text-center ">Dont have account?
-    <Link to="/registration"><a   className="underline"> Register</a></Link>
+    <Link to="/registration"><a   className="underline">SignUp</a></Link>
 </p>
 <div className="my-6 space-y-4">
     <button onClick={handleGoogle} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ri focus:ri dark:border-gray-400 focus:ri">
@@ -101,6 +102,7 @@ const Login = () => {
     <div className="flex justify-center">
     <button type="submit" className="bg-gradient-to-r from-emerald-500  to-blue-500 text-white text-xl font-medium  px-6 py-2 ">Sign in</button>
     </div>
+   
 </form>
                 </div></section>
 
