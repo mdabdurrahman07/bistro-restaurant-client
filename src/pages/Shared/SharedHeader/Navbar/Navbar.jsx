@@ -11,10 +11,11 @@ const Navbar = () => {
      <Link to="/menu"> <li><a>Menu</a></li></Link>
      <Link to="/order/salad"> <li><a>Order</a></li></Link>
      {
-        User &&  <li><a><AiOutlineShoppingCart className="text-xl">
+        User &&  <Link to="/dashboard/MyCart">
+        <li><a><AiOutlineShoppingCart className="text-xl">
           </AiOutlineShoppingCart>  
            <div className="badge">{cart?.length}</div>
-           </a></li>
+           </a></li></Link>
      }
       </>
     

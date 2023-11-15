@@ -10,7 +10,7 @@ const Card = ({item}) => {
   const location = useLocation()
   const axios = UseAxios()
   const [, refetch] = UseCart()
-  const   {image ,  name ,  recipe , _id } = item;
+  const   {image ,  name ,  recipe , _id , price } = item;
   const {User} = useAuth()
   const handleAddToCart  = () => {
     if(User && User.email){
@@ -20,7 +20,8 @@ const Card = ({item}) => {
         foodID : _id,
         image,
         name,
-        userEmail : User.email
+        userEmail : User.email,
+        price
       }
       axios.post('/cart' , cartItem)
       .then(res => {
