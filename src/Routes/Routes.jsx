@@ -10,6 +10,8 @@ import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import DashBoard from "../layout/DashBoard/DashBoard";
 import Cart from "../pages/DashBoardPages/Cart/Cart";
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import AllUsers from "../pages/DashBoardPages/AllUsers/AllUsers";
 
   
   const router = createBrowserRouter([
@@ -41,11 +43,16 @@ import Cart from "../pages/DashBoardPages/Cart/Cart";
     },
     {
       path : '/dashboard',
-      element: <DashBoard></DashBoard>,
+      element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
       children : [
         {
           path : "/dashboard/MyCart",
           element : <Cart></Cart>
+        },
+        // admin 
+        {
+          path : "/dashboard/adminAllUsers",
+          element : <AllUsers></AllUsers>
         }
       ]
     }

@@ -3,8 +3,9 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/UseAuth';
 import toast from 'react-hot-toast'
+import UseAxiosPublic from '../../Hooks/UseAxiosPublic';
 const Login = () => {
-    
+    const publicAxios = UseAxiosPublic()
     const {login  , googleLogin} = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
@@ -50,15 +51,28 @@ const Login = () => {
     }
     const handleGoogle = () => {
         googleLogin()
-        .then(result => {
-            if(result.user)
-            {return toast.success('User Created Successfully') }})
-        .catch(error =>{
-            console.log(error)
+        .then(result =>{
+         console.log(result.user)
+         if(result.user){
+          const UserInfo = {
+            name : result.user.displayName,
+            email : result.user.email
+          }
+          publicAxios.post('users' , UserInfo)
+          .then(res => {
+            console.log(res.data)
+          })
+          navigate('/')
+          return toast.success('User Created Successfully')
+        }
         })
-
-
-}
+        .catch(error =>{
+          console.log(error)
+          if(error){
+            return toast.error(error.message)
+          }
+        })
+      }
 
 
 

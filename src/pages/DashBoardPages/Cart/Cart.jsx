@@ -1,9 +1,41 @@
+import Swal from "sweetalert2";
 import UseCart from "../../../Hooks/UseCart";
 import { RiDeleteBinFill } from "react-icons/ri";
+import UseAxios from "../../../Hooks/UseAxios";
 
 const Cart = () => {
-    const [cart] = UseCart()
+    const [cart, refetch] = UseCart()
+    const axios = UseAxios()
     const totalPrice = cart.reduce((total , current) => total + current.price ,0)
+    const handleDelete = id =>{
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+         
+          axios.delete(`cart/${id}`)
+          .then(res => {
+            console.log(res.data)
+            if(res.data.deletedCount > 0){
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your item has been deleted.",
+                icon: "success"
+              });
+              refetch()
+            }
+          })
+          .catch(error => console.log(error))
+
+        }
+      });
+    }
     return (
         <div className="bg-[#F6F6F6] space-y-3">
             <div className="mt-16">
@@ -63,7 +95,7 @@ const Cart = () => {
             </td>
             <td>{items.price}</td>
             <th>
-              <button className="btn btn-ghost btn-xs"><RiDeleteBinFill className="text-xl text-red-500"></RiDeleteBinFill></button>
+              <button onClick={() =>  handleDelete(items._id)} className="btn btn-ghost btn-xs"><RiDeleteBinFill className="text-xl text-red-500"></RiDeleteBinFill></button>
             </th>
           </tr>)
      }

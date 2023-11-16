@@ -1,10 +1,12 @@
 import { updateProfile } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast'
 import useAuth from "../../Hooks/UseAuth";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 const Registration = () => {
     const {createUser , googleLogin} = useAuth()
-    
+    const publicAxios = UseAxiosPublic()
+    const naviagte = useNavigate()
      
     const handleRegister = e =>{
       
@@ -31,17 +33,28 @@ const Registration = () => {
     }
      createUser(email , password)
      .then(res=> {
-      console.log(res.user)
+      console.log('info',res.user)
       // updated user name and img
       updateProfile(res.user, {
         displayName: name, photoURL: url
       }).then(() => {
-        console.log()
-      }).catch(() => {
-        console.log()
+        const UserInfo = {
+          name : name,
+          email : email
+        }
+        console.log(UserInfo)
+       
+        publicAxios.post('users' , UserInfo)
+        .then(res => {
+          console.log(res.data)})
+        })
+        .catch((error) => {
+        console.log(error)
       });
       if(res.user){
+        naviagte('/')
         return toast.success('User Created Successfully')
+        
       }
      })
      .catch(err =>{
@@ -58,6 +71,15 @@ const Registration = () => {
       .then(result =>{
        console.log(result.user)
        if(result.user){
+        const UserInfo = {
+          name : result.user.displayName,
+          email : result.user.email
+        }
+        publicAxios.post('users' , UserInfo)
+        .then(res => {
+          console.log(res.data)
+        })
+        naviagte('/')
         return toast.success('User Created Successfully')
       }
       })
