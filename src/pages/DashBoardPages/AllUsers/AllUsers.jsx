@@ -10,7 +10,7 @@ const AllUsers = () => {
     const {data : users = [] , refetch } = useQuery({
         queryKey : ['users'],
         queryFn : async  () => {
-    const res = await axiosSecure('users')
+    const res = await axiosSecure.get('users')
     return res.data
         }
     })
@@ -44,7 +44,23 @@ const AllUsers = () => {
         });
       }
       const handleSetAdmin = user => {
-        console.log(user)
+        axiosSecure.patch(`users/admin/${user._id}`)
+        .then(res => {
+            console.log(res.data)
+            refetch()
+            if(res.data.modifiedCount > 0 ){
+                Swal.fire({
+                    icon: "success",
+                    title: `${user.name} is Admin Now`,
+                    showConfirmButton: false,
+                    timer: 1200
+                  });
+                 
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
       }
     return (
         <div className="bg-[#F6F6F6] space-y-3">
@@ -82,7 +98,7 @@ const AllUsers = () => {
                             <th>{idx +1}</th>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td><button onClick={() =>  handleSetAdmin(user)} className="btn btn-ghost btn-xs"><FaUsersCog className="text-xl text-orange-500"></FaUsersCog></button></td>
+                            <td>{user.role === 'Admin' ? <><p className="font-bold text-green-600 tracking-[2px]">Admin</p></> : <button onClick={() =>  handleSetAdmin(user)} className="btn btn-ghost btn-xs"><FaUsersCog className="text-xl text-orange-500"></FaUsersCog></button>}</td>
 
                             <td> <button  onClick={() =>  handleUserDelete(user._id)} className="btn btn-ghost btn-xs"><RiDeleteBinFill className="text-xl text-red-500"></RiDeleteBinFill></button></td>
                         </tr>)

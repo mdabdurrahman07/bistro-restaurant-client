@@ -4,11 +4,12 @@ import UseCart from "../../Hooks/UseCart";
 import { ImSpoonKnife } from "react-icons/im";
 import { MdManageSearch , MdOutlineGroups2 } from "react-icons/md";
 import { FaBook } from "react-icons/fa6";
+import UseAdmin from "../../Hooks/UseAdmin";
 
 
 const DashBoard = () => {
     const [cart] = UseCart()
-    const isAdmin = true
+    const [isAdmin] = UseAdmin()
     return (
         <div className="flex ">
             {/* sidebar */}

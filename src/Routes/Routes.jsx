@@ -12,6 +12,7 @@ import DashBoard from "../layout/DashBoard/DashBoard";
 import Cart from "../pages/DashBoardPages/Cart/Cart";
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import AllUsers from "../pages/DashBoardPages/AllUsers/AllUsers";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
 
   
   const router = createBrowserRouter([
@@ -43,7 +44,7 @@ import AllUsers from "../pages/DashBoardPages/AllUsers/AllUsers";
     },
     {
       path : '/dashboard',
-      element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+      element: <AdminRoutes><DashBoard></DashBoard></AdminRoutes>,
       children : [
         {
           path : "/dashboard/MyCart",
