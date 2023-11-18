@@ -13,6 +13,8 @@ import Cart from "../pages/DashBoardPages/Cart/Cart";
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import AllUsers from "../pages/DashBoardPages/AllUsers/AllUsers";
 import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import AddItems from "../pages/DashBoardPages/AddItems/AddItems";
+import ManageItems from "../pages/DashBoardPages/ManageItems/ManageItems";
 
   
   const router = createBrowserRouter([
@@ -44,7 +46,7 @@ import AdminRoutes from "../AdminRoutes/AdminRoutes";
     },
     {
       path : '/dashboard',
-      element: <AdminRoutes><DashBoard></DashBoard></AdminRoutes>,
+      element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
       children : [
         {
           path : "/dashboard/MyCart",
@@ -53,8 +55,18 @@ import AdminRoutes from "../AdminRoutes/AdminRoutes";
         // admin 
         {
           path : "/dashboard/adminAllUsers",
-          element : <AllUsers></AllUsers>
+          element : <AdminRoutes><AllUsers></AllUsers></AdminRoutes>
+        },
+
+        {
+          path : "/dashboard/adminAddItems",
+          element : <AdminRoutes><AddItems></AddItems></AdminRoutes>
+        },
+        {
+          path : '/dashboard/adminManageItems',
+          element : <ManageItems></ManageItems>
         }
+
       ]
     }
   ]);
