@@ -3,6 +3,7 @@ import UseMenu from "../../../Hooks/UseMenu";
 import { MdEditDocument } from "react-icons/md";
 import Swal from "sweetalert2";
 import UseAxios from "../../../Hooks/UseAxios";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
     const [menu , refetch] = UseMenu()
@@ -84,7 +85,7 @@ const ManageItems = () => {
                         </td>
                         <td>${items?.price}</td>
                         <td>
-                        <button  className="btn btn-ghost btn-xs"><MdEditDocument className="text-xl text-orange-500"></MdEditDocument></button>
+                        <Link to={`/dashboard/adminUpdateItems/${items._id}`}><button  className="btn btn-ghost btn-xs"><MdEditDocument className="text-xl text-orange-500"></MdEditDocument></button></Link>
                         </td>
                         <td>
                         <button onClick={() =>  handleDelete(items)} className="btn btn-ghost btn-xs"><RiDeleteBinFill className="text-xl text-red-500"></RiDeleteBinFill></button>
