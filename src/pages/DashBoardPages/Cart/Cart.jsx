@@ -2,11 +2,13 @@ import Swal from "sweetalert2";
 import UseCart from "../../../Hooks/UseCart";
 import { RiDeleteBinFill } from "react-icons/ri";
 import UseAxios from "../../../Hooks/UseAxios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = UseCart()
     const axios = UseAxios()
     const totalPrice = cart.reduce((total , current) => total + current.price ,0)
+    const price = parseInt(totalPrice.toFixed(2))
     const handleDelete = id =>{
       Swal.fire({
         title: "Are you sure?",
@@ -52,8 +54,15 @@ const Cart = () => {
           <div className="bg-white mx-5 ">
           <div className="flex justify-around gap-10 p-5 mb-9">
             <h2 className="text-4xl font-bold text-center  text-[#151515] uppercase">Total orders: {cart.length}</h2>
-            <h2 className="text-4xl font-bold text-center  text-[#151515] uppercase">total price: {totalPrice}</h2>
-            <button className="bg-[#D1A054] text-white px-5 py-3 font-semibold rounded-lg uppercase">Pay</button>
+            <h2 className="text-4xl font-bold text-center  text-[#151515] uppercase">total price: {price}</h2>
+           {
+            cart.length ?  <Link to="/dashboard/Payment"><button className="bg-[#D1A054] text-white px-5 py-3 font-semibold rounded-lg uppercase">
+              Pay</button></Link>
+
+              :
+              <button disabled className="bg-[#D1A054] text-white px-5 py-3 font-semibold rounded-lg uppercase">
+              Pay</button>
+           }
             </div>
            {/* table */}
 
