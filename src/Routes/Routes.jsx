@@ -57,7 +57,7 @@ import PaymentHistory from "../pages/DashBoardPages/PaymentHistory/PaymentHistor
         },
         {
             path : '/dashboard/Payment',
-            element : <Payment></Payment>
+            element : <PrivateRoute><Payment></Payment></PrivateRoute>
         },
         {
           path : '/dashboard/PaymentHistory',
