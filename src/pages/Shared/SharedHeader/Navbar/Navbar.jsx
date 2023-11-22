@@ -2,14 +2,22 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../../Hooks/UseAuth";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import UseCart from "../../../../Hooks/UseCart";
+import UseAdmin from "../../../../Hooks/UseAdmin";
 
 const Navbar = () => {
   const {User , logout} = useAuth()
   const [cart] = UseCart()
+  const [isAdmin] = UseAdmin() 
      const navOptions = <>
     <Link to="/"><li><a>Home</a></li></Link>
      <Link to="/menu"> <li><a>Menu</a></li></Link>
      <Link to="/order/salad"> <li><a>Order</a></li></Link>
+     {
+      User && isAdmin &&  <Link to="/dashboard/adminHome"> <li><a>Admin DashBoard</a></li></Link>
+     }
+     {
+      User && !isAdmin &&  <Link to="/dashboard/UserHome"> <li><a>DashBoard</a></li></Link>
+     }
      {
         User &&  <Link to="/dashboard/MyCart">
         <li><a><AiOutlineShoppingCart className="text-xl">
@@ -17,6 +25,7 @@ const Navbar = () => {
            <div className="badge">{cart?.length}</div>
            </a></li></Link>
      }
+     
       </>
     
       const handleLogout = () => {

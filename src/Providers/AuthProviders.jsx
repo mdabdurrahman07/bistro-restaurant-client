@@ -43,6 +43,7 @@ const AuthProviders = ({children}) => {
                     
                     if(res.data?.token){
                         localStorage.setItem('AccessToken' , res.data?.token)
+                        setloading(false)
                     }
                 })
                 .catch(error => console.log(error))
@@ -50,8 +51,9 @@ const AuthProviders = ({children}) => {
             }
             else{
                 localStorage.removeItem('AccessToken')
+                setloading(false)
             }
-            setloading(false)
+           
         })
         return () => 
        {
