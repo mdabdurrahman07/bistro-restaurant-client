@@ -8,13 +8,14 @@ const UseAdmin = () => {
     const {data : isAdmin , isPending  : isAdminLoading } = useQuery({
        
         queryKey : [User?.email , "isAdmin"],
-        // enabled : !loading && !User?.email && !localStorage.getItem('AccessToken'),
+        enabled : !loading ,
         queryFn : async () => {
 
        
             
             const res = await AxiosSecure(`users/admin/${User.email}`)
-            
+           
+            console.log('admin check' , res)
             return res.data?.admin
         
           
