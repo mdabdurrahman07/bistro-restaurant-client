@@ -8,12 +8,12 @@ This is a React Full stack project
 
  - Tablet & Mobile Responsive
  - Login & Register System 
- - Admin Pannel
+ - Admin Dashboard
  - Private Route System
- - Loader
  - CRUD Method
  - Dynamics Routes
  - Secure Database
+ - Stripe Payment System
  
 
 ## Links
