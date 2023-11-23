@@ -6,7 +6,7 @@ const UseAxios = () => {
   const navigate = useNavigate()
   const {logout} = UseAuth()
     const instance = axios.create({
-        baseURL: 'http://localhost:8000/',
+        baseURL: 'https://bistro-resturant-server-chi.vercel.app/',
         
         
       });

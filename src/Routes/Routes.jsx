@@ -92,7 +92,7 @@ import AdminHome from "../pages/DashBoardPages/AdminHome/AdminHome";
         {
           path : "/dashboard/adminUpdateItems/:id",
           element : <UpdateItems></UpdateItems>,
-          loader : ({params}) => fetch(`http://localhost:8000/menu/${params.id}`)
+          loader : ({params}) => fetch(`https://bistro-resturant-server-chi.vercel.app/menu/${params.id}`)
         }
 
       ]
